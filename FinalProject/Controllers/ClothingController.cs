@@ -35,6 +35,7 @@ namespace FinalProject.Controllers
             Clothing clothing = context.Clothes.Include(c => c.Images).Include(c => c.Information).Include(c => c.Category).FirstOrDefault(c => c.Id == id);
             if (clothing == null) return NotFound();
             return View(clothing);
+        
         }
         public IActionResult AddBasket(int? id)
         {
