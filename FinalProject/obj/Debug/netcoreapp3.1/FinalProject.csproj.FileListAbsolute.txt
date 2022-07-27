@@ -146,3 +146,4 @@ C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\bin\Debug\netcor
 C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\obj\Debug\netcoreapp3.1\Razor\Views\Clothing\Shop.cshtml.g.cs
+C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\obj\Debug\netcoreapp3.1\Razor\Views\Clothing\Detail.cshtml.g.cs

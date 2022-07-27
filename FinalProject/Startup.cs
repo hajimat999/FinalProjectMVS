@@ -32,6 +32,7 @@ namespace FinalProject
                 option.UseSqlServer(config.GetConnectionString("Default"));
             });
             services.AddScoped<LayoutService>();
+            services.AddHttpContextAccessor();
 
         }
 

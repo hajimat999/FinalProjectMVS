@@ -1,5 +1,7 @@
 ﻿@using FinalProject.HomeVMs
 @using FinalProject.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
 @model HomeVM
 @{
     ViewData["Title"] = "Index";
@@ -111,7 +113,7 @@
         @foreach (Category category in Model.Categories.Take(12))
         {
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-                <a class="text-decoration-none" href="">
+                <a class="text-decoration-none" asp-controller="Clothing" asp-action="shop" asp-route-id="@category.Id">
                     <div class="cat-item d-flex align-items-center mb-4">
                         <div class="overflow-hidden" style="width: 100px; height: 100px;">
                             <img class="img-fluid" src="~/assets/img/cat-1.jpg" alt="">
@@ -132,7 +134,7 @@
 <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Featured Products</span></h2>
     <div class="row px-xl-5">
-        @foreach (Clothing clothes in Model.Clothes.OrderBy(c=>c.Price).Take(8))
+        @foreach (Clothing clothes in Model.Clothes.OrderBy(c => c.Price).Take(8))
         {
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
@@ -146,7 +148,7 @@
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">@clothes.Name</a>
+                        <a class="h6 text-decoration-none text-truncate" asp-controller="clothing" asp-action="detail" asp-route-id="@clothes.Id">@clothes.Name</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>@clothes.Price</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>
@@ -196,7 +198,7 @@
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">Recent Products</span></h2>
     <div class="row px-xl-5">
 
-        @foreach (Clothing clothes in Model.Clothes.OrderByDescending(c=>c.Id).Take(8))
+        @foreach (Clothing clothes in Model.Clothes.OrderByDescending(c => c.Id).Take(8))
         {
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4">
@@ -210,7 +212,7 @@
                         </div>
                     </div>
                     <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">@clothes.Name</a>
+                        <a class="h6 text-decoration-none text-truncate" asp-controller="clothing" asp-action="detail" asp-route-id="@clothes.Id">@clothes.Name</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>@clothes.Price</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                         </div>

@@ -27,7 +27,7 @@ using FinalProject.HomeVMs;
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6a306b9a33a9d37754a7ce208dd663615948249b", @"/Views/Clothing/Shop.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"3301186ad28bae07ffd092d230965747aafc76f7", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"717a3f4845268dcfbcc2a98a0e78f08a69c2d051", @"/Views/_ViewImports.cshtml")]
     public class Views_Clothing_Shop : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Clothing>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("img-fluid w-100"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -52,6 +52,8 @@ using FinalProject.HomeVMs;
                 return __backed__tagHelperScopeManager;
             }
         }
+        private global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper;
+        private global::Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper __Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper;
         private global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
@@ -72,47 +74,64 @@ using FinalProject.HomeVMs;
             <!-- Price Start -->
             <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by price</span></h5>
             <div class=""bg-light p-4 mb-30"">
-                <form>
+                ");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a306b9a33a9d37754a7ce208dd663615948249b4737", async() => {
+                WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" checked id=""price-all"">
                         <label class=""custom-control-label"" for=""price-all"">All Price</label>
                         <span class=""badge border font-weight-normal"">1000</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
-                        <input type=""checkbox"" class=""custom-control-inpu");
-            WriteLiteral(@"t"" id=""price-1"">
+                        <input type=""checkbox"" class=""custom-control-input"" id=""price-1"">
                         <label class=""custom-control-label"" for=""price-1"">$0 - $100</label>
                         <span class=""badge border font-weight-normal"">150</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
-                        <input type=""checkbox"" class=""custom-control-input"" id=""price-2"">
+                        <input type=""checkbox"" class=""cust");
+                WriteLiteral(@"om-control-input"" id=""price-2"">
                         <label class=""custom-control-label"" for=""price-2"">$100 - $200</label>
                         <span class=""badge border font-weight-normal"">295</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""price-3"">
                         <label class=""custom-control-label"" for=""price-3"">$200 - $300</label>
-                        <span class=""badge border font-weight-normal"">246</span");
-            WriteLiteral(@">
+                        <span class=""badge border font-weight-normal"">246</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""price-4"">
                         <label class=""custom-control-label"" for=""price-4"">$300 - $400</label>
-                        <span class=""badge border font-weight-normal"">145</span>
+                        <span class=""badge border font-weight-");
+                WriteLiteral(@"normal"">145</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""price-5"">
                         <label class=""custom-control-label"" for=""price-5"">$400 - $500</label>
                         <span class=""badge border font-weight-normal"">168</span>
                     </div>
-                </form>
+                ");
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral(@"
             </div>
             <!-- Price End -->
             <!-- Color Start -->
-            <h5 class=""section-title position-relativ");
-            WriteLiteral(@"e text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by color</span></h5>
+            <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by color</span></h5>
             <div class=""bg-light p-4 mb-30"">
-                <form>
+                ");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a306b9a33a9d37754a7ce208dd663615948249b8935", async() => {
+                WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" checked id=""color-all"">
                         <label class=""custom-control-label"" for=""price-all"">All Color</label>
@@ -123,9 +142,9 @@ using FinalProject.HomeVMs;
                         <label class=""custom-control-label"" for=""color-1"">Black</label>
                         <span class=""badge border font-weight-normal"">150</span>
                     </div>
-                    <div class=");
-            WriteLiteral(@"""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
-                        <input type=""checkbox"" class=""custom-control-input"" id=""color-2"">
+                    <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
+                        <input type=""checkbox"" class=""custom-c");
+                WriteLiteral(@"ontrol-input"" id=""color-2"">
                         <label class=""custom-control-label"" for=""color-2"">White</label>
                         <span class=""badge border font-weight-normal"">295</span>
                     </div>
@@ -136,25 +155,40 @@ using FinalProject.HomeVMs;
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""color-4"">
-                       ");
-            WriteLiteral(@" <label class=""custom-control-label"" for=""color-4"">Blue</label>
+                        <label class=""custom-control-label"" for=""color-4"">Blue</label>
                         <span class=""badge border font-weight-normal"">145</span>
-                    </div>
+     ");
+                WriteLiteral(@"               </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""color-5"">
                         <label class=""custom-control-label"" for=""color-5"">Green</label>
                         <span class=""badge border font-weight-normal"">168</span>
                     </div>
-                </form>
+                ");
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral(@"
             </div>
             <!-- Color End -->
             <!-- Size Start -->
             <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by size</span></h5>
             <div class=""bg-light p-4 mb-30"">
-                <form>
+                ");
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a306b9a33a9d37754a7ce208dd663615948249b13100", async() => {
+                WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
-      ");
-            WriteLiteral(@"                  <input type=""checkbox"" class=""custom-control-input"" checked id=""size-all"">
+                        <input type=""checkbox"" class=""custom-control-input"" checked id=""size-all"">
                         <label class=""custom-control-label"" for=""size-all"">All Size</label>
                         <span class=""badge border font-weight-normal"">1000</span>
                     </div>
@@ -164,10 +198,10 @@ using FinalProject.HomeVMs;
                         <span class=""badge border font-weight-normal"">150</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
-                        <input type=""checkbox"" class=""custom-control-input"" id=""size-2"">
+                        <input type=""checkbox"" class=""custom-control-i");
+                WriteLiteral(@"nput"" id=""size-2"">
                         <label class=""custom-control-label"" for=""size-2"">S</label>
-                        <");
-            WriteLiteral(@"span class=""badge border font-weight-normal"">295</span>
+                        <span class=""badge border font-weight-normal"">295</span>
                     </div>
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" id=""size-3"">
@@ -179,13 +213,27 @@ using FinalProject.HomeVMs;
                         <label class=""custom-control-label"" for=""size-4"">L</label>
                         <span class=""badge border font-weight-normal"">145</span>
                     </div>
-                    <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between"">
-             ");
-            WriteLiteral(@"           <input type=""checkbox"" class=""custom-control-input"" id=""size-5"">
+");
+                WriteLiteral(@"                    <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between"">
+                        <input type=""checkbox"" class=""custom-control-input"" id=""size-5"">
                         <label class=""custom-control-label"" for=""size-5"">XL</label>
                         <span class=""badge border font-weight-normal"">168</span>
                     </div>
-                </form>
+                ");
+            }
+            );
+            __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper);
+            __Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper>();
+            __tagHelperExecutionContext.Add(__Microsoft_AspNetCore_Mvc_TagHelpers_RenderAtEndOfFormTagHelper);
+            await __tagHelperRunner.RunAsync(__tagHelperExecutionContext);
+            if (!__tagHelperExecutionContext.Output.IsContentModified)
+            {
+                await __tagHelperExecutionContext.SetOutputContentAsync();
+            }
+            Write(__tagHelperExecutionContext.Output);
+            __tagHelperExecutionContext = __tagHelperScopeManager.End();
+            WriteLiteral(@"
             </div>
             <!-- Size End -->
         </div>
@@ -201,10 +249,10 @@ using FinalProject.HomeVMs;
                         </div>
                         <div class=""ml-2"">
                             <div class=""btn-group"">
-     ");
-            WriteLiteral(@"                           <button type=""button"" class=""btn btn-sm btn-light dropdown-toggle"" data-toggle=""dropdown"">Sorting</button>
+                                <button type=""button"" class=""btn btn-sm btn-light dropdown-toggle"" data-toggle=""dropdown"">Sorting</button>
                                 <div class=""dropdown-menu dropdown-menu-right"">
-                                    <a class=""dropdown-item"" href=""#"">Latest</a>
+                                    <a class=""dropdown-item"" href=""#"">Latest</a");
+            WriteLiteral(@">
                                     <a class=""dropdown-item"" href=""#"">Popularity</a>
                                     <a class=""dropdown-item"" href=""#"">Best Rating</a>
                                 </div>
@@ -214,8 +262,14 @@ using FinalProject.HomeVMs;
                                 <div class=""dropdown-menu dropdown-menu-right"">
                                     <a class=""dropdown-item"" href=""#"">10</a>
                                     <a class=""dropdown-item"" href=""#"">20</a>
-                                    <a cla");
-            WriteLiteral("ss=\"dropdown-item\" href=\"#\">30</a>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n");
+                                    <a class=""dropdown-item"" href=""#"">30</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+");
 #nullable restore
 #line 153 "C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\Views\Clothing\Shop.cshtml"
                  foreach (Clothing clothing in Model)
@@ -225,7 +279,7 @@ using FinalProject.HomeVMs;
 #line hidden
 #nullable disable
             WriteLiteral("                    <div class=\"col-lg-4 col-md-6 col-sm-6 pb-1\">\r\n                        <div class=\"product-item bg-light mb-4\">\r\n                            <div class=\"product-img position-relative overflow-hidden\">\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "6a306b9a33a9d37754a7ce208dd663615948249b15702", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "6a306b9a33a9d37754a7ce208dd663615948249b19536", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
