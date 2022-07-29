@@ -2,6 +2,7 @@
 using FinalProject.HomeVMs;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -40,23 +41,26 @@ namespace FinalProject.Services
                 layoutBasket.BasketItemVMs = new List<BasketItemVM>();
                 foreach (BasketCookieItemVM cookie in basket.BasketCookieItemVModels)
                 {
-                    Clothing existed = context.Clothes.FirstOrDefault(c => c.Id == cookie.Id);
-                    if (existed == null)
+                    if (cookie!=null)
                     {
-                        basket.BasketCookieItemVModels.Remove(cookie);
-                        continue;
+                        Clothing existed = context.Clothes.Include(c=>c.Images).FirstOrDefault(c => c.Id == cookie.Id);
+                        if (existed == null)
+                        {
+                            basket.BasketCookieItemVModels.Remove(cookie);
+                            continue;
+                        }
+                        BasketItemVM basketItem = new BasketItemVM
+                        {
+                            Clothing = existed,
+                            Quantity = cookie.Quantity,
+                            ClothingId = existed.Id
+
+                        };
+                        layoutBasket.BasketItemVMs.Add(basketItem);
                     }
-                    BasketItemVM basketItem = new BasketItemVM
-                    {
-                        Clothing = existed,
-                        Quantity = cookie.Quantity,
-                        ClothingId = existed.Id
-                        
-                    };
-                    layoutBasket.BasketItemVMs.Add(basketItem);
                 }
                 layoutBasket.TotalPrice = basket.TotalPrice;
-                return layoutBasket; 
+                return layoutBasket;
             }
             return null;
         }

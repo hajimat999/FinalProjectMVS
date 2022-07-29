@@ -1,5 +1,5 @@
 ﻿@using FinalProject.Models
-@model Clothing
+@model ClothesCategory
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, AuthoringTagHelpers
 @inject FinalProject.Services.LayoutService layoutservice
@@ -26,10 +26,10 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="~/assets/img/@Model.Images.FirstOrDefault(i => i.IsMain == true)?.Name" alt="Image">
+                        <img class="w-100 h-100" src="~/assets/img/@Model.Cloth.Images.FirstOrDefault(i => i.IsMain == true)?.Name" alt="Image">
                     </div>
 
-                    @foreach (Image item in Model.Images)
+                    @foreach (Image item in Model.Cloth.Images)
                     {
                         <div class="carousel-item">
                             <img class="w-100 h-100" src="~/assets/img/@item.Name" alt="Image">
@@ -48,7 +48,7 @@
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>@Model.Name</h3>
+                <h3>@Model.Cloth.Name</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -59,9 +59,9 @@
                     </div>
                     <small class="pt-1">(99 Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">@Model.Price</h3>
+                <h3 class="font-weight-semi-bold mb-4">@Model.Cloth.Price</h3>
                 <p class="mb-4">
-                    @Model.Title
+                    @Model.Cloth.Title
                 </p>
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Sizes:</strong>
@@ -116,7 +116,7 @@
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <a asp-controller="clothing" asp-action="minus" asp-route-id="@Model.Id"  class="btn btn-primary btn-minus">
+                            <a asp-controller="clothing" asp-action="minus" asp-route-id="@Model.Cloth.Id"  class="btn btn-primary btn-minus">
                                 <i class="fa fa-minus"></i>
                             </a>
                         </div>
@@ -125,18 +125,18 @@
                             BasketItemVM viewModel = new BasketItemVM();
                             if (layoutservice.GetBasket() != null)
                             {
-                                viewModel = layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Id);
+                                viewModel = layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id);
 
                             }
                         }
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="@(layoutservice.GetBasket() == null || viewModel==null ?  quantity : layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b =>b.ClothingId==Model.Id).Quantity)">
+                        <input type="text" class="form-control bg-secondary border-0 text-center" value="@(layoutservice.GetBasket() == null || viewModel==null ?  quantity : layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b =>b.ClothingId==Model.Cloth.Id).Quantity)">
                         <div class="input-group-btn">
-                            <a asp-controller="Clothing" asp-action="plyus" asp-route-id="@Model.Id" class="btn btn-primary btn-plus">
+                            <a asp-controller="Clothing" asp-action="plyus" asp-route-id="@Model.Cloth.Id" class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </a>
                         </div>
                     </div>
-                    <a asp-controller="clothing" asp-action="AddBasket" asp-route-id="@Model.Id" class="btn btn-primary px-3">
+                    <a asp-controller="clothing" asp-action="AddBasket" asp-route-id="@Model.Cloth.Id" class="btn btn-primary px-3">
                         <i class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart
                     </a>
@@ -172,42 +172,41 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                        <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                        <p>@Model.Cloth.Description</p>
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
                         <h4 class="mb-3">Additional Information</h4>
                         <div class="row">
-                            <p>@Model.Information.AdditionalInformation</p>
+                            <p>@Model.Cloth.Information.AdditionalInformation</p>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information1
+                                        @Model.Cloth.Information.Information1
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information2
+                                        @Model.Cloth.Information.Information2
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information3
+                                        @Model.Cloth.Information.Information3
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information4
+                                        @Model.Cloth.Information.Information4
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information1
+                                        @Model.Cloth.Information.Information1
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information2
+                                        @Model.Cloth.Information.Information2
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information3
+                                        @Model.Cloth.Information.Information3
                                     </li>
                                     <li class="list-group-item px-0">
-                                        @Model.Information.Information4
+                                        @Model.Cloth.Information.Information4
                                     </li>
                                 </ul>
                             </div>
@@ -277,11 +276,12 @@
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
-                @foreach (Image item in Model.Images)
+
+                @foreach (Clothing clothing in Model.Clothes)
                 {
                     <div class="product-item bg-light">
                         <div class="product-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="~/assets/img/product-1.jpg" alt="">
+                            <img class="img-fluid w-100" src="~/assets/img/@clothing.Images.FirstOrDefault(i=>i.IsMain==true)?.Name" alt="">
                             <div class="product-action">
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                 <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -290,9 +290,9 @@
                             </div>
                         </div>
                         <div class="text-center py-4">
-                            <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
+                            <a class="h6 text-decoration-none text-truncate" href="">@clothing.Name</a>
                             <div class="d-flex align-items-center justify-content-center mt-2">
-                                <h5>$123.00</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
+                                <h5>@clothing.Price</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
                             </div>
                             <div class="d-flex align-items-center justify-content-center mb-1">
                                 <small class="fa fa-star text-primary mr-1"></small>
@@ -304,7 +304,6 @@
                             </div>
                         </div>
                     </div>
-
                 }
 
 

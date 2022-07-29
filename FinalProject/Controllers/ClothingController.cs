@@ -34,13 +34,23 @@ namespace FinalProject.Controllers
             if (id == 0 || id is null) return NotFound();
             Clothing clothing = context.Clothes.Include(c => c.Images).Include(c => c.Information).Include(c => c.Category).FirstOrDefault(c => c.Id == id);
             if (clothing == null) return NotFound();
-            return View(clothing);
-        
+
+
+            ClothesCategory clothesCategory = new ClothesCategory
+            {
+                Cloth = clothing,
+                Clothes = context.Clothes.Include(x=>x.Images).Include(x=>x.Information).Include(x=>x.Category).Where(x=>x.CategoryId==clothing.CategoryId).ToList()
+
+            };
+            return View(clothesCategory);
+            
+
+
         }
-        public IActionResult AddBasket(int? id)
+        public async Task<IActionResult> AddBasket(int? id)
         {
             if (id is null || id == 0) return NotFound();
-            Clothing clothing = context.Clothes.FirstOrDefault(c => c.Id == id);
+            Clothing clothing =await context.Clothes.FirstOrDefaultAsync(c => c.Id == id);
             if (clothing == null)
             {
                 return NotFound();
@@ -84,13 +94,15 @@ namespace FinalProject.Controllers
             }
             basketStr = JsonConvert.SerializeObject(basket);
             HttpContext.Response.Cookies.Append("Basket", basketStr);
-            return RedirectToAction("Index", "Home");
+            
+            return Redirect(Request.Headers["Referer"].ToString());
         }
         public IActionResult Plyus(int? id)
         {
             if (id == null || id == 0) return NotFound();
             string basketStr = HttpContext.Request.Cookies["Basket"];
             Clothing clothing = context.Clothes.FirstOrDefault(c => c.Id == id);
+     
             BasketVM basket;
             if (basketStr == null)
             {
@@ -106,8 +118,10 @@ namespace FinalProject.Controllers
             }
             else
             {
+                
                 basket = JsonConvert.DeserializeObject<BasketVM>(basketStr);
-                BasketCookieItemVM cookieItemVM = basket.BasketCookieItemVModels.FirstOrDefault(c => c.Id == id);
+                
+                BasketCookieItemVM cookieItemVM = basket.BasketCookieItemVModels.Find(c =>c!=null&& c.Id == id);
                 if (cookieItemVM == null)
                 {
                     BasketCookieItemVM basketCookieItemVM = new BasketCookieItemVM
@@ -116,7 +130,7 @@ namespace FinalProject.Controllers
                         Quantity = 1
 
                     };
-                    basket.BasketCookieItemVModels.Add(cookieItemVM);
+                    basket.BasketCookieItemVModels.Add(basketCookieItemVM);
                     basket.TotalPrice += clothing.Price;
                 }
                 else
@@ -129,7 +143,8 @@ namespace FinalProject.Controllers
             }
             basketStr = JsonConvert.SerializeObject(basket);
             HttpContext.Response.Cookies.Append("Basket", basketStr);
-            return RedirectToAction("Index", "Home");
+            
+            return Redirect(Request.Headers["Referer"].ToString());
 
         }
         public IActionResult Minus(int? id)
@@ -157,28 +172,57 @@ namespace FinalProject.Controllers
                 BasketCookieItemVM basketCookieItem = basket.BasketCookieItemVModels.FirstOrDefault(b => b.Id == id);
                 if (basketCookieItem == null)
                 {
-                    BasketCookieItemVM basketCookie = new BasketCookieItemVM
-                    {
-                        Id = clothing.Id,
-                        Quantity = 1
-                    };
-                    basket.BasketCookieItemVModels.Add(basketCookie);
-                    basket.TotalPrice += clothing.Price;
                     return NotFound();
                 }
                 else
                 {
+                    if (basketCookieItem.Quantity == 1)
+                    {
+                        basket.BasketCookieItemVModels.Remove(basketCookieItem);
+                        basket.TotalPrice -= clothing.Price;
+                        basketStr = JsonConvert.SerializeObject(basket);
+                        HttpContext.Response.Cookies.Append("Basket", basketStr);
+
+                        return Redirect(Request.Headers["Referer"].ToString());
+                        
+                    }
                     basket.TotalPrice -= clothing.Price;
                     basketCookieItem.Quantity--;
+
                 }
                 
             }
             basketStr = JsonConvert.SerializeObject(basket);
             HttpContext.Response.Cookies.Append("Basket", basketStr);
-            return RedirectToAction("Index", "Home");
+            
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
+        public IActionResult RemoveProductbyId(int? id)
+        {
+            if (id is null || id == 0) return NotFound();
+            string basketStr = HttpContext.Request.Cookies["Basket"];
+            Clothing clothing = context.Clothes.FirstOrDefault(c => c.Id == id);
+            BasketVM basket;
+            if (!string.IsNullOrEmpty(basketStr))
+            {
+                basket = JsonConvert.DeserializeObject<BasketVM>(basketStr);
+                BasketCookieItemVM basketCookie = basket.BasketCookieItemVModels.FirstOrDefault(b => b.Id == id);
+                if (basketCookie == null)
+                {
+                    return NotFound();
+                }
+                basket.BasketCookieItemVModels.Remove(basketCookie);
+                basket.TotalPrice-=(clothing.Price*basketCookie.Quantity);
+                basketStr = JsonConvert.SerializeObject(basket);
+                HttpContext.Response.Cookies.Append("Basket", basketStr);
+                return Redirect(Request.Headers["Referer"].ToString());
+
+            }
+            
+            return NotFound();
+
         }
     }
-    
     
     
 }
