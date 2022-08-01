@@ -21,6 +21,8 @@ namespace FinalProject.DAL
         public DbSet<Information> Informations { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Setting> Settings { get; set; }
+        
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

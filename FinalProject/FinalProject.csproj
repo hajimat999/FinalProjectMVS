@@ -7,6 +7,10 @@
   <ItemGroup>
     <Compile Remove="Migrations\20220725115501_createFinalProject.cs" />
     <Compile Remove="Migrations\20220725115501_createFinalProject.Designer.cs" />
+    <Compile Remove="Migrations\20220729081052_createdcolor.cs" />
+    <Compile Remove="Migrations\20220729081052_createdcolor.Designer.cs" />
+    <Compile Remove="Migrations\20220730003728_create6.cs" />
+    <Compile Remove="Migrations\20220730003728_create6.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
