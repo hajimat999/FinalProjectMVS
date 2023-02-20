@@ -1,8 +1,17 @@
 ﻿@inject FinalProject.Services.LayoutService layoutservice
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper *, AuthoringTagHelpers
+@model List<BasketItem>
+
 @{
     ViewData["Title"] = "Cart";
+    decimal totalPrice = 0;
+    if(User.Identity.IsAuthenticated){
+        
+        foreach (BasketItem item in Model)
+        {
+            totalPrice += item.Price*item.Quantity;
+        }
+    }
+   
 }
 
 <div class="container-fluid">
@@ -19,36 +28,70 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-
-                    @if (layoutservice.GetBasket() != null)
-                    {
-                        @foreach (BasketItemVM clothing in layoutservice.GetBasket().BasketItemVMs)
+                    @if(User.Identity.IsAuthenticated){
+                        if (Model.Count() > 0)
                         {
-                    <tr>
-                        <td class="align-middle"><img src="~/assets/img/@clothing.Clothing.Images.FirstOrDefault(i=>i.IsMain==true)?.Name" alt="" style="width: 50px;"> @clothing.Clothing.Name</td>
-                        <td class="align-middle">@clothing.Clothing.Price</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <a asp-controller="clothing" asp-action="minus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </a>
-                                </div>
-                                <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@clothing.Quantity">
-                                <div class="input-group-btn">
-                                    <a asp-controller="clothing" asp-action="plyus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-                       
-                        <td class="align-middle">@layoutservice.GetBasket().TotalPrice</td>
-                        <td class="align-middle"><a asp-controller="clothing" asp-action="RemoveProductbyId" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
-                    </tr>
+                            @foreach (BasketItem clothing in Model)
+                            {
+                                <tr>
+                                    <td class="align-middle"><img src="~/assets/img/@clothing.Clothing.Images.FirstOrDefault(i=>i.IsMain==true)?.Name" alt="" style="width: 50px;"> @clothing.Clothing.Name</td>
+                                    <td class="align-middle">@clothing.Clothing.Price</td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <a asp-controller="clothing" asp-action="minus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-minus">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@clothing.Quantity">
+                                            <div class="input-group-btn">
+                                                <a asp-controller="clothing" asp-action="plyus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
 
+                                    <td class="align-middle">@totalPrice</td>
+                                    <td class="align-middle"><a asp-controller="clothing" asp-action="RemoveProductbyId" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+                                </tr>
+
+                            }
                         }
                     }
+                    else{
+                        if (layoutservice.GetBasketCoookies() != null)
+                        {
+                            @foreach (BasketItemVM clothing in layoutservice.GetBasketCoookies().BasketItemVMs)
+                            {
+                                <tr>
+                                    <td class="align-middle"><img src="~/assets/img/@clothing.Clothing.Images.FirstOrDefault(i=>i.IsMain==true)?.Name" alt="" style="width: 50px;"> @clothing.Clothing.Name</td>
+                                    <td class="align-middle">@clothing.Clothing.Price</td>
+                                    <td class="align-middle">
+                                        <div class="input-group quantity mx-auto" style="width: 100px;">
+                                            <div class="input-group-btn">
+                                                <a asp-controller="clothing" asp-action="minus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-minus">
+                                                    <i class="fa fa-minus"></i>
+                                                </a>
+                                            </div>
+                                            <input type="text" class="form-control form-control-sm bg-secondary border-0 text-center" value="@clothing.Quantity">
+                                            <div class="input-group-btn">
+                                                <a asp-controller="clothing" asp-action="plyus" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-primary btn-plus">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="align-middle">@layoutservice.GetBasketCoookies().TotalPrice</td>
+                                    <td class="align-middle"><a asp-controller="clothing" asp-action="RemoveProductbyId" asp-route-id="@clothing.ClothingId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+                                </tr>
+
+                            }
+                        }
+
+                    }
+                    
                 </tbody>
             </table>
         </div>
@@ -78,7 +121,13 @@
                         @{ 
                             int counter = 0;
                         }
-                        <h5>@(layoutservice.GetBasket()!=null && layoutservice.GetBasket().TotalPrice >= 0 ? layoutservice.GetBasket().TotalPrice : counter)</h5>
+                        @if(User.Identity.IsAuthenticated){
+                            <h5>@(Model.Count != 0 && totalPrice >= 0 ? totalPrice : counter)</h5>
+                        }
+                        else{
+                            <h5>@(layoutservice.GetBasketCoookies()?.TotalPrice)</h5>
+                        }
+                        
                         <h5></h5>
                     </div>
                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>

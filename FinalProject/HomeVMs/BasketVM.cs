@@ -9,6 +9,6 @@ namespace FinalProject.HomeVMs
     {
         public List<BasketCookieItemVM> BasketCookieItemVModels { get; set; }
         public decimal TotalPrice { get; set; }
-        public object BasketCookieItemVMs { get; internal set; }
+      
     }
 }

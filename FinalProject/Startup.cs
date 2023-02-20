@@ -22,6 +22,7 @@ namespace FinalProject
 
         public Startup(IConfiguration config)
         {
+            
             this.config = config;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,7 +36,8 @@ namespace FinalProject
             });
             services.AddIdentity<AppUser, IdentityRole>(opt =>
             {
-                opt.User.RequireUniqueEmail = false;
+                opt.User.RequireUniqueEmail = true;
+                //opt.SignIn.RequireConfirmedEmail = true;
                 opt.User.AllowedUserNameCharacters = "qwertyuiopasdfghjklzxcbvnm1234567890";
                 opt.Password.RequiredUniqueChars = 3;
                 opt.Password.RequiredLength = 8;
@@ -50,7 +52,8 @@ namespace FinalProject
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddScoped<LayoutService>();
             services.AddHttpContextAccessor();
-
+     
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +63,7 @@ namespace FinalProject
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //app.UseStatusCodePagesWithRedirects("Error/ErrorPage");
             app.UseRouting();
             app.UseStaticFiles();
             app.UseAuthentication();

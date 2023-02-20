@@ -10,5 +10,7 @@ namespace FinalProject.HomeVMs
     {
         public Clothing Cloth { get; set; }
         public List<Clothing> Clothes { get; set; }
+        public List<BasketItem> BasketItems { get; set; }
+        
     }
 }

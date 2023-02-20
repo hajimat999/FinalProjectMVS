@@ -1,4 +1,4 @@
-﻿@model List<Clothing>
+﻿@model ShopViewModel
 @{
     ViewData["Title"] = "Shop";
 }
@@ -12,33 +12,43 @@
             <div class="bg-light p-4 mb-30">
                 <form>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="price-all">
+                    
                         <label class="custom-control-label" for="price-all">All Price</label>
-                        <span class="badge border font-weight-normal">1000</span>
+                     
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-1">
-                        <label class="custom-control-label" for="price-1">$0 - $100</label>
+                        <input type="hidden" value="0" />
+                        <input type="hidden" value="500" />
+                        <label class="custom-control-label" for="price-1">$0 - $500</label>
                         <span class="badge border font-weight-normal">150</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-2">
-                        <label class="custom-control-label" for="price-2">$100 - $200</label>
+                        <input type="hidden" value="500" />
+                        <input type="hidden" value="1000" />
+                        <label class="custom-control-label" for="price-2">$500 - $1000</label>
                         <span class="badge border font-weight-normal">295</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-3">
-                        <label class="custom-control-label" for="price-3">$200 - $300</label>
+                        <input type="hidden" value="1000" />
+                        <input type="hidden" value="1500" />
+                        <label class="custom-control-label" for="price-3">$1000 - $1500</label>
                         <span class="badge border font-weight-normal">246</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                         <input type="checkbox" class="custom-control-input" id="price-4">
-                        <label class="custom-control-label" for="price-4">$300 - $400</label>
+                        <input type="hidden" value="1500" />
+                        <input type="hidden" value="3000" />
+                        <label class="custom-control-label" for="price-4">$1500 - $3000</label>
                         <span class="badge border font-weight-normal">145</span>
                     </div>
                     <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                         <input type="checkbox" class="custom-control-input" id="price-5">
-                        <label class="custom-control-label" for="price-5">$400 - $500</label>
+                         <input type="hidden" value="3000" />
+                        <input type="hidden" value="100000" />
+                        <label class="custom-control-label" for="price-5">$3000 - </label>
                         <span class="badge border font-weight-normal">168</span>
                     </div>
                 </form>
@@ -48,36 +58,21 @@
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" checked id="color-all">
-                        <label class="custom-control-label" for="price-all">All Color</label>
-                        <span class="badge border font-weight-normal">1000</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-1">
-                        <label class="custom-control-label" for="color-1">Black</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-2">
-                        <label class="custom-control-label" for="color-2">White</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-3">
-                        <label class="custom-control-label" for="color-3">Red</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="color-4">
-                        <label class="custom-control-label" for="color-4">Blue</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="color-5">
-                        <label class="custom-control-label" for="color-5">Green</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
+                    @{
+                        int num1 = 1;
+                    }
+                    @foreach (Color color in Model.Colors)
+                   {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+                            <input value="0" type="hidden"> 
+                            <input value="@color.Id" type="checkbox" class="custom-control-input" id="color-@num1">
+                            <label class="custom-control-label" for="color-@num1">@color.Name</label>
+                            <span class="badge border font-weight-normal">168</span>
+                           
+                        </div>
+                        num1++;
+                    }
+                    
                 </form>
             </div>
             <!-- Color End -->
@@ -90,31 +85,21 @@
                         <label class="custom-control-label" for="size-all">All Size</label>
                         <span class="badge border font-weight-normal">1000</span>
                     </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-1">
-                        <label class="custom-control-label" for="size-1">XS</label>
-                        <span class="badge border font-weight-normal">150</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-2">
-                        <label class="custom-control-label" for="size-2">S</label>
-                        <span class="badge border font-weight-normal">295</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-3">
-                        <label class="custom-control-label" for="size-3">M</label>
-                        <span class="badge border font-weight-normal">246</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                        <input type="checkbox" class="custom-control-input" id="size-4">
-                        <label class="custom-control-label" for="size-4">L</label>
-                        <span class="badge border font-weight-normal">145</span>
-                    </div>
-                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                        <input type="checkbox" class="custom-control-input" id="size-5">
-                        <label class="custom-control-label" for="size-5">XL</label>
-                        <span class="badge border font-weight-normal">168</span>
-                    </div>
+                    @{
+                        int num = 1;
+                    }
+                    @foreach (Size size in Model.Sizes)
+                   {
+                         <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input value="@size.Id" type="hidden"> 
+                            <input value="@size.Id" type="checkbox" class="custom-control-input" id="size-@num">
+                            <label class="custom-control-label" for="size-@num">@size.SizeName</label>
+                            <span class="badge border font-weight-normal">150</span>
+                                        
+                        </div>
+                        num++;                      
+                    }
+                    
                 </form>
             </div>
             <!-- Size End -->
@@ -149,40 +134,109 @@
                         </div>
                     </div>
                 </div>
-
-                @foreach (Clothing clothing in Model)
-                {
-                    <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
-                        <div class="product-item bg-light mb-4">
-                            <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="~/assets/img/@clothing.Images.FirstOrDefault(c=>c.IsMain==true)?.Name" alt="">
-                                <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center py-4">
-                                <a class="h6 text-decoration-none text-truncate" asp-controller="Clothing" asp-action="detail" asp-route-id="@clothing.Id">@clothing.Name</a>
-                                <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>@clothing.Price</h5><h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
+             
+               
+                <div class="row col-12" id="div2">
+                   @await Html.PartialAsync("_ProductPartialView", Model.Clothings.OrderByDescending(c=>c.Id));
+               </div>
+                
             </div>
         </div>
         <!-- Shop Product End -->
     </div>
 </div>
-<!-- Shop End -->
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript">
+   
+    var radioInputs = document.querySelectorAll(".custom-control-input");
+    var inputRadioValue = '';
+    radioInputs.forEach(function (input) {
+        input.addEventListener('click', function (e) {
+
+            if (e.target.previousElementSibling != null && e.target.previousElementSibling.value == 0){
+                  //alert("color")
+                  inputRadioValue = input.value;
+                  var szId = 0;
+                  var data = inputRadioValue;
+                  $.ajax({
+                      type: "POST",
+                      url: "/Shop/shop1/",
+                      data: { colorId: data, sizeId:szId },
+                      dataType: "html",
+                      success: function (data) {
+                          document.getElementById('div2').innerHTML = data;
+                                          
+                      },
+                      error: function () {
+                           alert("Error occured!!")                   
+                      }
+
+                  });
+                              
+              }
+            else if (e.target.previousElementSibling != null && e.target.previousElementSibling.value != 0) {
+                  //alert("size")
+                  inputRadioValue = e.target.previousElementSibling.value; 
+                  var clrId = 0;
+                  var data = inputRadioValue;
+                  $.ajax({
+                      type: "POST",
+                      url: "/Shop/shop1/",
+                      data: { colorId: clrId, sizeId:data },
+                      dataType: "html",
+                      success: function (data) {
+                          document.getElementById('div2').innerHTML = data;
+                                          
+                      },
+                      error: function () {
+                           alert("Error occured!!")                   
+                      }
+
+                  });
+                 
+            }
+            else{
+                //alert('price')
+                var minPrice = e.target.nextElementSibling.value;
+                var maxPrice = e.target.nextElementSibling.nextElementSibling.value;
+                var clrId = 0;
+                var szId = 0;
+                $.ajax({
+                    type: "POST",
+                    url: "/Shop/shop1/",
+                    data: { colorId: clrId, sizeId:szId, minPrice: minPrice, maxPrice:maxPrice },
+                    dataType: "html",
+                    success: function (data) {
+                        document.getElementById('div2').innerHTML = data;
+
+                    },
+                    error: function () {
+                        alert("Error occured!!")
+                    }
+
+                });
+            }
+              
+             
+           
+
+        })
+    })
+ 
+ </script>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+
+

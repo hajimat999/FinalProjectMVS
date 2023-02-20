@@ -1,11 +1,18 @@
-﻿using FinalProject.HomeVMs;
+﻿
+using FinalProject.HomeVMs;
 using FinalProject.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Threading.Tasks;
+using System.Net.Mime;
+using MimeKit;
 
 namespace FinalProject.Controllers
 {
@@ -13,13 +20,13 @@ namespace FinalProject.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
-        private readonly RoleManager<IdentityRole> roleManager;
+
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            
+      
         }
         public IActionResult Register()
         {
@@ -41,6 +48,8 @@ namespace FinalProject.Controllers
                 Email = registerVM.Email
             };
             IdentityResult identityResult = await userManager.CreateAsync(user, registerVM.Password);
+
+
             if (!identityResult.Succeeded)
             {
                 foreach (IdentityError error in identityResult.Errors)
@@ -50,9 +59,11 @@ namespace FinalProject.Controllers
                 }
                 return View();
             }
-            return RedirectToAction("index", "home");
             
-        }
+
+            return Json("Ok");
+        }    
+
         public IActionResult Login()
         {
             return View();
@@ -87,6 +98,11 @@ namespace FinalProject.Controllers
         {
             await signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ShowLogin()
+        {
+            return Json(User.Identity.IsAuthenticated);
         }
     }
 }

@@ -28,7 +28,9 @@ using FinalProject.HomeVMs;
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"6703780c62a5427b73b190c982efcc592c349dfa", @"/Views/Clothing/Shop.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"717a3f4845268dcfbcc2a98a0e78f08a69c2d051", @"/Views/_ViewImports.cshtml")]
+    #nullable restore
     public class Views_Clothing_Shop : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<List<Clothing>>
+    #nullable disable
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("img-fluid w-100"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("alt", new global::Microsoft.AspNetCore.Html.HtmlString(""), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -79,7 +81,7 @@ using FinalProject.HomeVMs;
             <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by price</span></h5>
             <div class=""bg-light p-4 mb-30"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa5854", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa5900", async() => {
                 WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" checked id=""price-all"">
@@ -134,7 +136,7 @@ using FinalProject.HomeVMs;
             <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by color</span></h5>
             <div class=""bg-light p-4 mb-30"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa10052", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa10098", async() => {
                 WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" checked id=""color-all"">
@@ -189,7 +191,7 @@ using FinalProject.HomeVMs;
             <h5 class=""section-title position-relative text-uppercase mb-3""><span class=""bg-secondary pr-3"">Filter by size</span></h5>
             <div class=""bg-light p-4 mb-30"">
                 ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa14218", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa14264", async() => {
                 WriteLiteral(@"
                     <div class=""custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3"">
                         <input type=""checkbox"" class=""custom-control-input"" checked id=""size-all"">
@@ -283,7 +285,7 @@ using FinalProject.HomeVMs;
 #line hidden
 #nullable disable
             WriteLiteral("                    <div class=\"col-lg-4 col-md-6 col-sm-6 pb-1\">\r\n                        <div class=\"product-item bg-light mb-4\">\r\n                            <div class=\"product-img position-relative overflow-hidden\">\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "6703780c62a5427b73b190c982efcc592c349dfa20654", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "6703780c62a5427b73b190c982efcc592c349dfa20700", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -320,7 +322,7 @@ AddHtmlAttributeValue("", 10876, clothing.Images.FirstOrDefault(i=>i.IsMain==tru
             BeginWriteAttribute("href", " href=\"", 11454, "\"", 11461, 0);
             EndWriteAttribute();
             WriteLiteral("><i class=\"fa fa-search\"></i></a>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"text-center py-4\">\r\n                                ");
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa23661", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6703780c62a5427b73b190c982efcc592c349dfa23707", async() => {
 #nullable restore
 #line 167 "C:\Users\Baku\Desktop\ASP.NETCoreTask\FinalProject\FinalProject\Views\Clothing\Shop.cshtml"
                                                                                                                                                       Write(clothing.Name);
@@ -410,16 +412,26 @@ AddHtmlAttributeValue("", 10876, clothing.Images.FirstOrDefault(i=>i.IsMain==tru
 ");
         }
         #pragma warning restore 1998
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.ViewFeatures.IModelExpressionProvider ModelExpressionProvider { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.IUrlHelper Url { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.IViewComponentHelper Component { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; } = default!;
+        #nullable disable
+        #nullable restore
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<List<Clothing>> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<List<Clothing>> Html { get; private set; } = default!;
+        #nullable disable
     }
 }
 #pragma warning restore 1591

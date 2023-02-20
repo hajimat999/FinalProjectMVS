@@ -1,7 +1,6 @@
-﻿@using FinalProject.Models
+﻿
 @model ClothesCategory
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@addTagHelper *, AuthoringTagHelpers
+
 @inject FinalProject.Services.LayoutService layoutservice
 @{
     ViewData["Title"] = "Detail";
@@ -18,8 +17,7 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
-<!-- Shop Detail Start -->
+
 <div class="container-fluid pb-5">
     <div class="row px-xl-5">
         <div class="col-lg-5 mb-30">
@@ -66,58 +64,121 @@
                 <div class="d-flex mb-3">
                     <strong class="text-dark mr-3">Sizes:</strong>
                     <form>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-1" name="size">
-                            <label class="custom-control-label" for="size-1">XS</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-2" name="size">
-                            <label class="custom-control-label" for="size-2">S</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-3" name="size">
-                            <label class="custom-control-label" for="size-3">M</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-4" name="size">
-                            <label class="custom-control-label" for="size-4">L</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="size-5" name="size">
-                            <label class="custom-control-label" for="size-5">XL</label>
-                        </div>
+
+                        @foreach (ClothingSize item in Model.Cloth.ClothingSizes)
+                        {
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="@item.SizeId" type="radio" class="custom-control-input" id="size-1" name="size">
+                                <label class="custom-control-label" for="size-1">@item.Size.SizeName</label>
+                            </div>
+
+                        }
+                        <p id="h111"></p>
                     </form>
                 </div>
                 <div class="d-flex mb-4">
                     <strong class="text-dark mr-3">Colors:</strong>
                     <form method="post">
+                        @foreach (ClothingColor item in Model.Cloth.ClothingColors)
+                        {
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="@item.ColorId" type="radio" class="custom1-control1-input1" id="color-1" name="color">
+                                <label class="custom-control-label" for="color-1">@item.Color.Name</label>
+                            </div>
+
+                        }
+                        <p id="h222"></p>
 
                     </form>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <a asp-controller="clothing" asp-action="minus" asp-route-id="@Model.Cloth.Id"  class="btn btn-primary btn-minus">
+                            <a @*asp-controller="clothing" asp-action="minus" asp-route-id="@Model.Cloth.Id"*@ id="minusitem" class="btn btn-primary btn-minus">
                                 <i class="fa fa-minus"></i>
                             </a>
                         </div>
-                        @{ 
+                        @{
                             int quantity = 0;
-                            BasketItemVM viewModel = new BasketItemVM();
-                            if (layoutservice.GetBasket() != null)
+                            int quantity2 = 0;
+                            if (User.Identity.IsAuthenticated)
                             {
-                                viewModel = layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id);
+
+                                if (Model.BasketItems.Count() > 0)
+                                {
+                                    if (Model.BasketItems.Count() == 1)
+                                    {
+                                        quantity2 = Model.BasketItems.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id).Quantity;
+
+                                    }
+                                    else
+                                    {
+                                        List<BasketItem> basketItems = Model.BasketItems.Where(b => b.ClothingId == Model.Cloth.Id).ToList();
+                                        foreach (BasketItem item in basketItems)
+                                        {
+                                            quantity2 += item.Quantity;
+                                        }
+
+                                    }
+                                }
+                                                                    <input id="basket999" type="text" class="form-control bg-secondary border-0 text-center" value="@(Model.BasketItems.Count() == 0 ?  quantity : quantity2)">
+
+                            }
+                            else
+                            {
+                                int quantity3 = 0;
+                                int quantity4 = 0;
+                                BasketItemVM viewModel = new BasketItemVM();
+                                if (layoutservice.GetBasketCoookies() != null)
+                                {
+                                    if (layoutservice.GetBasketCoookies().BasketItemVMs.Count() > 0)
+                                    {
+                                        if (layoutservice.GetBasketCoookies().BasketItemVMs.Count() == 1)
+                                        {
+                                            if (layoutservice.GetBasketCoookies().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id) != null)
+                                            {
+
+                                                quantity3 = layoutservice.GetBasketCoookies().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id).Quantity;
+                                            }
+
+
+                                        }
+                                        else
+                                        {
+                                            List<BasketItemVM> basketItems = layoutservice.GetBasketCoookies().BasketItemVMs.Where(b => b.ClothingId == Model.Cloth.Id).ToList();
+                                            if (basketItems.Count() != 0)
+                                            {
+                                                foreach (BasketItemVM item in basketItems)
+                                                {
+                                                    quantity3 += item.Quantity;
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+
+                                    <input id="basket999" type="text" class="form-control bg-secondary border-0 text-center" value="@(layoutservice.GetBasketCoookies() == null && layoutservice.GetBasketCoookies().BasketItemVMs.FirstOrDefault(b => b.ClothingId == Model.Cloth.Id) == null && layoutservice.GetBasketCoookies().BasketItemVMs.Where(b => b.ClothingId == Model.Cloth.Id).ToList().Count() == 0 ?  quantity4 : quantity3)">
+
+                                }
+                                else
+                                {
+                                    <input id="basket999" type="text" class="form-control bg-secondary border-0 text-center" value="@(layoutservice.GetBasketCoookies() == null ?  quantity4 : quantity3)">
+
+                                }
 
                             }
                         }
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="@(layoutservice.GetBasket() == null || viewModel==null ?  quantity : layoutservice.GetBasket().BasketItemVMs.FirstOrDefault(b =>b.ClothingId==Model.Cloth.Id).Quantity)">
+
+                        @*  <input type="text" class="form-control bg-secondary border-0 text-center" value="@(Model.BasketItems.Count == 0 ?  quantity : quantity2)">*@
                         <div class="input-group-btn">
-                            <a asp-controller="Clothing" asp-action="plyus" asp-route-id="@Model.Cloth.Id" class="btn btn-primary btn-plus">
+                            <a id="basketplyus" @*asp-controller="Clothing" asp-action="plyus" asp-route-id="@Model.Cloth.Id"*@ class="btn btn-primary btn-plus">
                                 <i class="fa fa-plus"></i>
                             </a>
+                            <input id="basketinput" type="hidden" value="@Model.Cloth.Id" />
                         </div>
                     </div>
-                    <a asp-controller="clothing" asp-action="AddBasket" asp-route-id="@Model.Cloth.Id" class="btn btn-primary px-3">
+                    <a id="addtocart" @*asp-controller="clothing" asp-action="AddBasket" asp-route-id="@Model.Cloth.Id"*@ class="btn btn-primary px-3">
                         <i class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart
                     </a>
@@ -257,7 +318,7 @@
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
-
+                @*@await Html.PartialAsync("_ProductPartialView", Model.Clothes.OrderByDescending(c=>c.Id).Take(4));*@
                 @foreach (Clothing clothing in Model.Clothes)
                 {
                     <div class="product-item bg-light">
@@ -286,10 +347,126 @@
                         </div>
                     </div>
                 }
-
-
             </div>
         </div>
     </div>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript">
+    var inputValue = $('#basketinput').val();   
+    var inputRadioValue = '';
+    var inputRadioColorValue = '';
+    $('#basketplyus').click(function (event) {
+        event.preventDefault();
+        var data = inputValue;
+        if (inputRadioValue == "") {
+            document.getElementById("h111").innerHTML = "You have to choose one of the sizes"
+            $('#h111').css('color', 'red')
+        }
+        if (inputRadioColorValue == ""){
+            document.getElementById("h222").innerHTML = "You have to choose one of the colors"
+            $('#h222').css('color', 'red')
+        }
+        else{
+            
+            $.ajax({
+                type: "POST",
+                url: "/Clothing/Plyus/",
+                dataType: "json",
+                data: { productId: data, colorId: inputRadioColorValue, sizeId: inputRadioValue },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error occured!!")
+                }
+            });
+
+        }
+        
+        
+    });
+  
+    // Add Basket
+    $('#addtocart').click(function (event) {
+        event.preventDefault();
+        var data = inputValue;
+        if (inputRadioValue == "") {
+            document.getElementById("h111").innerHTML = "You have to choose one of the sizes"
+            $('#h111').css('color', 'red')
+        }
+        if (inputRadioColorValue == "") {
+            document.getElementById("h222").innerHTML = "You have to choose one of the colors"
+            $('#h222').css('color', 'red')
+        }
+        else {
+
+            $.ajax({
+                type: "POST",
+                url: "/Clothing/AddBasket/",
+                dataType: "html",
+                data: { productId: data, colorId: inputRadioColorValue, sizeId: inputRadioValue },
+                success: function (data){                   
+                    
+                    console.log(document.getElementById('basket999'))
+                    if (document.getElementById('basket999').value == 0 && document.getElementById('layoutbasket').innerHTML == 0){
+                  
+                        document.getElementById('layoutbasket').innerHTML = 1;
+                        document.getElementById('basket999').value = 1;
+                        
+                    }
+                    else if (document.getElementById('basket999').value == 0){
+                      
+                        document.getElementById('layoutbasket').innerHTML++;
+                        document.getElementById('basket999').value++
+                    }
+                    else{
+                     
+                        document.getElementById('basket999').value++
+                    }
+            
+                },
+                error: function () {                     
+                    alert("Please Login!!!")   
+                    location.reload();
+                }
+            });
+
+        }
+    });
+   
+    var radioInputs = document.querySelectorAll(".custom-control-input");
+    radioInputs.forEach(function (input) {
+        input.addEventListener('click', function () {
+            inputRadioValue = input.value
+            
+        })
+    })
+    var radioInputsColors = document.querySelectorAll(".custom1-control1-input1");
+    radioInputsColors.forEach(function (input) {
+        input.addEventListener('click', function () {
+            inputRadioColorValue = input.value
+
+        })
+    })
+    $('#minusitem').click(function (event) {
+        event.preventDefault();
+        var data = inputValue;
+        $.ajax({
+            type: "POST",
+            url: "/Clothing/Minus/",
+            data: { productId: data, colorId: inputRadioColorValue, sizeId: inputRadioValue },
+            dataType: "json",
+            success: function (data) {
+                location.reload();
+            },
+            error: function() {
+                alert("Error occured!!")
+            }
+        });
+    });
+
+</script>
 <!-- Products End -->

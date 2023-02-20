@@ -18,10 +18,9 @@ namespace FinalProject.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Image> Images { get; set;}
-        
-        internal List<Clothing> ToList()
-        {
-            throw new NotImplementedException();
-        }
+        public List<ClothingColor> ClothingColors { get; set; }
+        public List<ClothingSize> ClothingSizes { get; set; }
+
+
     }
 }
